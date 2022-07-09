@@ -1,0 +1,26 @@
+Bootstrap: localimage
+From: base.sif
+
+%files
+	~/github/IB_Parallel /IB_Parallel
+
+%post
+	cd /IB_Parallel
+
+	# remove the ./output folder so that we can bind it from the host system
+	rm -rf output/
+	
+	make ib
+
+%runscript
+	cd /IB_Parallel
+
+	ARG=$1
+
+	if [ "$ARG" = "default" ]; then
+		echo "executing default case"
+		mpirun -np 2 ./bin/ib -malloc_dump -ksp_monitor_true_residual -ksp_converged_reason
+	else
+		echo "running user-defined string: '$ARG'"
+		exec $ARG
+	fi

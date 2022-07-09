@@ -1,0 +1,37 @@
+Bootstrap: docker
+From: ubuntu:22.04
+
+%files
+
+%post
+	apt-get update -y
+	export DEBIAN_FRONTEND=noninteractive
+	apt-get install git libopenmpi-dev libmpich-dev python3 build-essential gfortran-12 gcc libopenblas-dev libmetis-dev libparmetis-dev cmake -y
+
+	cd /
+	git clone -b release https://gitlab.com/petsc/petsc.git petsc --depth 1
+
+	cd /petsc
+
+	# compile with optimizations
+	# see https://petsc.org/release/install/install/#compilers
+	./configure \
+		--with-debugging=0 \
+		COPTFLAGS='-O3 -march=native -mtune=native' \
+		CXXOPTFLAGS='-O3 -march=native -mtune=native' \
+		FOPTFLAGS='-O3 -march=native -mtune=native' \
+		--with-fftw=1 \
+		--with-metis=1 \
+		--with-parmetis=1 \
+		--with-elemental=1 \
+		--download-elemental=yes \
+		--download-metis=yes \
+		--download-parmetis=yes \
+		--download-fftw=yes
+
+	# compile petsc
+	make all check
+
+	# make gfortran-12 the default gfortran compiler
+	rm /bin/gfortran
+	ln -s /bin/gfortran-12 /bin/gfortran

@@ -1,5 +1,5 @@
-PETSC_ARCH=intel-opt
-PETSC_DIR=${HOME}/project-nufgroup/petsc/src/petsc-3.11.1
+PETSC_ARCH=arch-linux-c-opt
+PETSC_DIR=/petsc
 
 include ${PETSC_DIR}/lib/petsc/conf/variables
 include ${PETSC_DIR}/lib/petsc/conf/rules
@@ -31,7 +31,7 @@ IBFILES_SRC := $(foreach p, $(IBFILES), $(SRC)/$(p))
 IBFILES_OBJ := $(foreach p, $(IBFILES), $(OBJ)/$(p))
 
 ib :  ${IBFILES_OBJ}
-	-${FLINKER} -o $(BIN)/ib $(IBFILES_OBJ) ${PETSC_LIB} -no-wrap-margin -heap-arrays 0
+	-${FLINKER} -o $(BIN)/ib $(IBFILES_OBJ) ${PETSC_LIB} 
 
 setup: ${DIRS}
 	@for i in ${DIR} ; do \
@@ -55,7 +55,7 @@ clean ::
 	rm -f $(BIN)/ib ${OBJ}/*.o ${OBJ}/*.mod *.mod
 
 $(OBJ)/%.o: $(SRC)/%.F90
-	${PETSC_MAKE_STOP_ON_ERROR}${FC} -c ${FC_FLAGS} ${FFLAGS} ${FCPPFLAGS} -o $@ $< $(FC_MODULE_OUTPUT_FLAG)$(OBJ) -no-wrap-margin -heap-arrays 0
+	${PETSC_MAKE_STOP_ON_ERROR}${FC} -c ${FC_FLAGS} ${FFLAGS} ${FCPPFLAGS} -o $@ $< $(FC_MODULE_OUTPUT_FLAG)$(OBJ) 
 
 %.dir : 	
 	$< 
