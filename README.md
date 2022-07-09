@@ -42,19 +42,18 @@ The first time you are building:
 
 ```
 ./build-apptainer.sh full
-./run-apptainer.sh default
 ```
 
 all subsequent compilations can be executed with:
 
 ```
-./run-apptainer.sh default
+./build-apptainer.sh full
 ```
 
 
 ### Running Apptainer Containers
 
-To run a default case of 
+To run a default case of
 
 ```
 mpirun -np 2 ./bin/ib -malloc_dump -ksp_monitor_true_residual -ksp_converged_reason
@@ -81,7 +80,7 @@ running user-defined string: 'echo 1234'
 1234
 ```
 
-The enclosing "" quotes around `1234` are important. Applying this metholody to the solver, you can adjust the number of processes
+The enclosing "" quotes around `1234` are important. Applying this methodology to the solver, you can adjust the number of processes
 for the default case with:
 
 ```
