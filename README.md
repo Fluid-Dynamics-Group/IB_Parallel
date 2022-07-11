@@ -47,9 +47,8 @@ The first time you are building:
 all subsequent compilations can be executed with:
 
 ```
-./build-apptainer.sh full
+./build-apptainer.sh
 ```
-
 
 ### Running Apptainer Containers
 
