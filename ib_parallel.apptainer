@@ -2,13 +2,15 @@ Bootstrap: localimage
 From: base.sif
 
 %files
-	~/github/IB_Parallel /IB_Parallel
+	./ /IB_Parallel
 
 %post
 	cd /IB_Parallel
 
-	# remove the ./output folder so that we can bind it from the host system
+	# remove the ./output and ./input folder so that we can bind it from the host system
+	# in ./run-apptainer.sh
 	rm -rf output/
+	rm -rf input/
 	
 	make ib
 

@@ -10,7 +10,9 @@ if [[ $# == 1 ]]; then
 	# run the container and bind the current directory's 
 	# ./output to the image's ./output
 	# so that we can output some results
-	apptainer run --bind $PWD/output/:/IB_Parallel/output $image "$1"
+	apptainer run \
+		--bind $PWD/output/:/IB_Parallel/output,$PWD/input/:/IB_Parallel/input \
+		$image "$1"
 else
 	echo "./run-apptainer.sh only expects one argument: \`default\` or a string to execute in the container"
 	exit
