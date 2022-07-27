@@ -26,3 +26,11 @@ From: base.sif
 		echo "running user-defined string: '$ARG'"
 		exec $ARG
 	fi
+
+%apprun distribute
+	cd /IB_Parallel
+
+	cp /input/ib.inp /IB_Parallel/input/
+	mpirun -np $1 ./bin/ib
+
+	cp /IB_Parallel/output/* /distribute_save/
