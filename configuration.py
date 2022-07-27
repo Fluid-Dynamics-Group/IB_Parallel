@@ -100,36 +100,41 @@ delta_sd = {self.delta_sd}
         with open(path, "w") as f:
             f.write(self.to_string())
 
+    @staticmethod
+    def default():
+        return Config(
+            istart = 0,
+            istop = 10,
+            isave = 10,
+            irestart = 0,
+            m = 860,
+            n = 860,
+            dt = 0.0004375,
+            re = 1000.,
+            fsi_tol = 1e-7,
+            atol = 1e-7,
+            rtol = 1e-7,
+            len = 3.,
+            offsetx = 0.5,
+            offsety = 1.5,
+            mgridlev=5,
+            compute_pressure="T",
+            dimen = 2,
+            num_stat = "F",
+            motion_prescribed="F",
+            sub_domain="T",
+            sub_domainfull_rectangular="F",
+            sub_domain_precomputed="F",
+            sdxi = 0.225581395348837,
+            sdxe = 0.696511627906977,
+            sdyi = -0.233720930232558,
+            sdye = 0.094186046511628,
+            delta_sd =  0.003488372093023
+        )
+
 def change_reynolds_number(re: float):
-    config = Config(
-        istart = 0,
-        istop = 10,
-        isave = 10,
-        irestart = 0,
-        m = 860,
-        n = 860,
-        dt = 0.0004375,
-        re = re,
-        fsi_tol = 1e-7,
-        atol = 1e-7,
-        rtol = 1e-7,
-        len = 3.,
-        offsetx = 0.5,
-        offsety = 1.5,
-        mgridlev=5,
-        compute_pressure="T",
-        dimen = 2,
-        num_stat = "F",
-        motion_prescribed="F",
-        sub_domain="T",
-        sub_domainfull_rectangular="F",
-        sub_domain_precomputed="F",
-        sdxi = 0.225581395348837,
-        sdxe = 0.696511627906977,
-        sdyi = -0.233720930232558,
-        sdye = 0.094186046511628,
-        delta_sd =  0.003488372093023
-    )
+    config = Config.default()
+    config.re = re
 
     return config
 
