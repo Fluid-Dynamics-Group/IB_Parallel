@@ -17,9 +17,9 @@ From: ubuntu:22.04
 	# see https://petsc.org/release/install/install/#compilers
 	./configure \
 		--with-debugging=0 \
-		COPTFLAGS='-O3 -march=native -mtune=native' \
-		CXXOPTFLAGS='-O3 -march=native -mtune=native' \
-		FOPTFLAGS='-O3 -march=native -mtune=native' \
+		COPTFLAGS='-O3' \
+		CXXOPTFLAGS='-O3' \
+		FOPTFLAGS='-O3' \
 		--with-fftw=1 \
 		--with-metis=1 \
 		--with-parmetis=1 \
@@ -30,7 +30,7 @@ From: ubuntu:22.04
 		--download-fftw=yes
 
 	# compile petsc
-	make all check
+	make all
 
 	# make gfortran-12 the default gfortran compiler
 	rm /bin/gfortran
